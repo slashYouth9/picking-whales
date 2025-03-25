@@ -1,0 +1,270 @@
+:root {
+  --bg-color: #ffffff;
+  --text-color: #2d3436;
+  --primary-color: #4a90e2;
+  --secondary-color: #6c5ce7;
+  --border-color: #dfe6e9;
+  --correct-color: #00b894;
+  --wrong-color: #d63031;
+  --feedback-bg: rgba(0, 0, 0, 0.03);
+  /* 新增反馈背景变量 */
+  --button-bg: #dfefff;
+  --button-text: var(--primary-color);
+  --button-hover-bg: #4a90e2;
+  --button-hover-text: #ffffff;
+}
+
+[data-theme="dark"] {
+  --bg-color: #2d3436;
+  --text-color: #f8f9fa;
+  --border-color: #636e72;
+  --correct-color: #55efc4;
+  --wrong-color: #ff7675;
+  --feedback-bg: rgba(255, 255, 255, 0.05);
+  /* 暗模式反馈背景 */
+  --button-bg: #4a90e2;
+  --button-text: #ffffff;
+  --button-hover-bg: #6c5ce7;
+  --button-hover-text: #ffffff;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--button-bg);
+  color: var(--button-text);
+  /* 修改底色为白色，文字颜色为主色 */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px var(--primary-color);
+  z-index: 1000;
+  font-size: 1em;
+  transition: transform 0.3s ease;
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  padding: 40px 20px;
+  transition: background 0.3s ease, color 0.3s ease;
+  /* 添加整体过渡效果 */
+  touch-action: manipulation;
+  /* 禁用双击缩放 */
+}
+
+.question {
+  margin: 20px 0;
+  padding: 24px;
+  background: var(--bg-color);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: border-color 0.3s ease;
+  /* 添加过渡效果 */
+}
+
+h3 {
+  color: var(--primary-color);
+  margin: 0 0 15px 0;
+  font-size: 1.3rem;
+}
+
+.option {
+  padding: 16px;
+  border: 2px solid var(--border-color);
+  background: var(--bg-color);
+  transition: all 0.2s ease;
+  margin: 8px 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.option:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  /* 添加输入框过渡 */
+}
+
+button {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  transition: all 0.2s ease;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  /* 修改字体大小并加粗 */
+}
+
+button:hover {
+  background: var(--button-hover-bg);
+  color: var(--button-hover-text);
+  /* 鼠标悬停时显示为深蓝色，文字颜色为白色 */
+}
+
+.nav-buttons {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.nav-buttons button:hover {
+  transform: translateY(-2px);
+  background-color: var(--secondary-color);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.correct {
+  border-color: var(--correct-color) !important;
+  background: rgba(0, 184, 148, 0.05) !important;
+}
+
+.wrong {
+  border-color: var(--wrong-color) !important;
+  background: rgba(214, 48, 49, 0.05) !important;
+}
+
+.feedback {
+  border-left: 3px solid;
+  background: var(--feedback-bg);
+  /* 使用变量 */
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.correct-feedback {
+  border-color: var(--correct-color);
+}
+
+.wrong-feedback {
+  border-color: var(--wrong-color);
+}
+
+.explanation {
+  color: var(--text-color);
+  opacity: 0.8;
+  margin-top: 10px;
+  font-size: 0.9em;
+}
+
+.question-list {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  background: var(--bg-color);
+  border-right: 2px solid var(--border-color);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  transform: translateX(-100%);
+  /* 初始隐藏 */
+}
+
+.question-list.open {
+  transform: translateX(0);
+  /* 展开时显示 */
+}
+
+.question-list button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.question-list button:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.toggle-list {
+  position: fixed;
+  left: 60px;
+  top: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 0 20px 20px 0;
+  background: var(--button-bg);
+  color: var(--button-text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  font-size: 1em;
+  transition: left 0.3s ease;
+  /* 移除发光效果 */
+}
+
+.question-list.open+.toggle-list {
+  left: 60px;
+  /* 列表展开时按钮位置 */
+}
+
+.question-list:not(.open)+.toggle-list {
+  left: 0;
+  /* 列表隐藏时按钮位置 */
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 30px 15px;
+  }
+
+  .question {
+    padding: 16px;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  .option {
+    padding: 10px;
+  }
+
+  .nav-buttons {
+    flex-direction: column;
+  }
+
+  .nav-buttons button:hover {
+    transform: none;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 60px 20px 20px;
+  }
+}
