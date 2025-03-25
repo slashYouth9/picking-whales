@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=5.0">
+  <title>题海拾荒站</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="theme-toggle" onclick="toggleTheme()">🌙</div>
+  <div class="question-list"></div>
+  <div class="toggle-list" onclick="toggleQuestionList()">☰</div>
+  <div id="questions"></div>
+  <div class="nav-buttons">
+    <button onclick="prevQuestion()">← 上一题</button>
+    <button onclick="nextQuestion()">下一题 →</button>
+  </div>
+  <script src="app.js"></script>
+</body>
+
+</html>
